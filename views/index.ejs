@@ -8,8 +8,10 @@
     <ul>
         <% messages.forEach((message) => { %>
             <%- `"${message.text}" - ${message.user}, ${message.added}` %>
+            <a href="/messageDetails/<%= message.id%>">Open</a>
         <% }); %>
     </ul>
-    <a href="/new">New message</a>
+
+    <a href="/new">New Message</a>
   </body>
 </html>

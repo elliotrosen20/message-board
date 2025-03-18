@@ -4,11 +4,13 @@ const router = Router();
 
 let messages = [
     {
+        id: 0,
         text: "Hi there!",
         user: "Amando",
         added: new Date()
     },
     {
+        id: 1,
         text: "Hello World!",
         user: "Charles",
         added: new Date()
@@ -27,8 +29,15 @@ router.get('/new', (req, res) => {
 router.post("/new", (req, res) => {
     const author = req.body.author;
     const message = req.body.message;
-    messages.push({ text: message, user: author, added: new Date() });
+    messages.push({ id: messages.length, text: message, user: author, added: new Date() });
     res.redirect("/");
+})
+
+router.get("/messageDetails/:id", (req, res) => {
+    const messageId = req.params.id;
+    const message = messages.find((m) => m.id == messageId);
+
+    res.render('messageDetails', { message: message });
 })
 
 module.exports = router;
